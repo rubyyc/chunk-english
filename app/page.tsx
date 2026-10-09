@@ -1,43 +1,25 @@
 import Link from "next/link";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { listPublishedEpisodes } from "@/lib/content";
 
-const recentEpisodes = [
-  {
-    epNo: "CK001",
-    title: "问路，这一句就够",
-    framework: "How do I get to the ___?",
-    detail: "换掉地点，句子照样能用。出国问路、打车报地点，这一句全覆盖。",
-    status: "免费",
-  },
-  {
-    epNo: "CK002",
-    title: "点杯咖啡，这一句就够",
-    framework: "Can I get a ___, please?",
-    detail: "正在准备内容导入，会员学习流程会与视频同步开放。",
-    status: "筹备中",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+export default async function HomePage() {
+  let episodes: Awaited<ReturnType<typeof listPublishedEpisodes>> = [];
+
+  try {
+    episodes = await listPublishedEpisodes();
+  } catch {
+    episodes = [];
+  }
+
+  const latestEpisode = episodes[0];
+  const framework = latestEpisode?.frameworkSay ?? "一个句式，二十种开口方式";
+
   return (
     <main>
-      <header className="topbar">
-        <div className="shell topbar-inner">
-          <Link className="brand" href="/" aria-label="苑说英语首页">
-            <span className="brand-mark" aria-hidden="true">—</span>
-            <span>
-              <strong>苑说英语</strong>
-              <small>CHUNK ENGLISH</small>
-            </span>
-          </Link>
-          <nav className="nav" aria-label="主导航">
-            <Link className="active" href="/">首页</Link>
-            <Link href="/chunk">语块英语</Link>
-            <Link href="/words">词库</Link>
-            <Link href="/pricing">会员</Link>
-          </nav>
-          <Link className="button button-ghost" href="/login">登录 / 注册</Link>
-        </div>
-      </header>
+      <SiteHeader active="home" />
 
       <section className="hero shell">
         <div className="hero-copy">
@@ -45,7 +27,9 @@ export default function HomePage() {
           <h1>每天 2 分钟，把英语从<span>学过</span>变成<span>说得出</span></h1>
           <p className="hero-summary">每集只讲一个万能句式。框架记住，槽位随便换。</p>
           <div className="actions">
-            <Link className="button button-primary" href="/chunk/ck001">开始学第 001 期</Link>
+            <Link className="button button-primary" href={latestEpisode ? `/chunk/${latestEpisode.epNo.toLowerCase()}` : "/chunk"}>
+              {latestEpisode ? `开始学第 ${latestEpisode.index.toString().padStart(3, "0")} 期` : "查看课程导入状态"}
+            </Link>
             <Link className="button button-ghost" href="/chunk">浏览全部单集</Link>
           </div>
           <ul className="trust-list">
@@ -55,15 +39,17 @@ export default function HomePage() {
           </ul>
         </div>
 
-        <div className="practice-card" aria-label="万能句式示例">
+        <div className="practice-card" aria-label="语块英语学习方式">
           <p className="card-label">万能句式 · 试一试</p>
-          <p className="sentence">How do I get to the <em>___</em>?</p>
-          <p className="translation">我怎么去<span>某个地点</span>？</p>
+          <p className="sentence">{framework}</p>
+          <p className="translation">{latestEpisode ? "导入后可在课程页听框架、练例句、查换词。" : "首集内容导入后，课程页会提供完整的听说练习。"}</p>
           <p className="muted">这就是语块：记住一个框架，换掉槽位就是新句子。</p>
           <div className="word-pills">
-            <span>subway</span><span>gym</span><span>airport</span><span>downtown</span>
+            <span>听框架</span><span>跟例句</span><span>查换词</span><span>反复开口</span>
           </div>
-          <Link className="text-link" href="/chunk/ck001">进这集完整学 <span aria-hidden="true">→</span></Link>
+          <Link className="text-link" href={latestEpisode ? `/chunk/${latestEpisode.epNo.toLowerCase()}` : "/chunk"}>
+            {latestEpisode ? "进课程完整学" : "查看课程状态"} <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
@@ -82,18 +68,22 @@ export default function HomePage() {
           </div>
           <Link className="text-link" href="/chunk">全部单集 →</Link>
         </div>
-        <div className="episode-grid">
-          {recentEpisodes.map((episode) => (
-            <article className="episode-card" key={episode.epNo}>
-              <div className="episode-number">NO.{episode.epNo.slice(-3)}</div>
-              <span className={episode.status === "免费" ? "badge badge-free" : "badge"}>{episode.status}</span>
-              <h3>{episode.title}</h3>
-              <p className="framework">{episode.framework}</p>
-              <p className="muted">{episode.detail}</p>
-              <Link className="text-link" href={episode.epNo === "CK001" ? "/chunk/ck001" : "/chunk"}>查看内容 →</Link>
-            </article>
-          ))}
-        </div>
+        {episodes.length === 0 ? (
+          <div className="empty-state">还没有已发布课程。运行内容导入命令后，最新课程会自动出现在这里。</div>
+        ) : (
+          <div className="episode-grid">
+            {episodes.slice(0, 2).map((episode) => (
+              <Link className="episode-card" key={episode.epNo} href={`/chunk/${episode.epNo.toLowerCase()}`}>
+                <div className="episode-number">NO.{episode.index.toString().padStart(3, "0")}</div>
+                <span className={episode.isFree ? "badge badge-free" : "badge"}>{episode.isFree ? "免费" : "会员"}</span>
+                <h3>{episode.title}</h3>
+                <p className="framework">{episode.frameworkSay}</p>
+                <p className="muted">{episode.duration ? `${episode.duration} 秒` : "已发布"}</p>
+                <span className="text-link">查看内容 →</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="shell section learn-section">
@@ -118,13 +108,7 @@ export default function HomePage() {
         </div>
         <Link className="button button-primary" href="/pricing">了解会员</Link>
       </section>
-
-      <footer className="footer">
-        <div className="shell footer-inner">
-          <div><strong>苑说英语</strong><p>每天 2 分钟，把英语从学过变成说得出。</p></div>
-          <p>© 2026 苑说英语</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

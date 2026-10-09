@@ -4,27 +4,24 @@
 
 | 脚本 | 状态 | 说明 |
 |---|---|---|
-| `import_episode.py` | **待开发** | 从视频项目导入单集：读 `content/*.json` + `assets/` + `产物/`，上传 MinIO，写数据库。详见 [../docs/05-内容同步方案.md](../docs/05-内容同步方案.md) |
+| `import_episode.ts` | ✅ 已实现 | 从视频项目导入单集：读 `content/*.json` + `assets/`，可上传 MinIO、写数据库。详见 [../docs/05-内容同步方案.md](../docs/05-内容同步方案.md) |
 
 ## 计划用法
 
 ```bash
 # 演练（不落地）
-python3 scripts/import_episode.py --ep CK001 --video-root ~/WorkBuddy/英语短视频 --dry-run
+npm run import:episode -- --ep CK001 --video-root ~/WorkBuddy/英语短视频 --dry-run
 
 # 真导入
-python3 scripts/import_episode.py --ep CK001 --video-root ~/WorkBuddy/英语短视频 --upload --db
+npm run import:episode -- --ep CK001 --video-root ~/WorkBuddy/英语短视频 --upload --db
 
 # 全量
-python3 scripts/import_episode.py --all --upload --db
+npm run import:episode -- --all --video-root ~/WorkBuddy/英语短视频 --upload --db
 ```
 
 ## 依赖
 
-```bash
-python3 -m venv .venv && . .venv/bin/activate
-pip install boto3 psycopg2-binary
-```
+使用项目已有的 Node.js 依赖：`@aws-sdk/client-s3`、Prisma 与 `tsx`。执行前先运行 `npm install`。
 
 ## 约束
 

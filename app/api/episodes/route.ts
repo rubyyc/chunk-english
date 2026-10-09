@@ -1,20 +1,9 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { listPublishedEpisodes } from "@/lib/content";
 
 export async function GET() {
   try {
-    const episodes = await prisma.episode.findMany({
-      where: { published: true },
-      orderBy: [{ sort: "asc" }, { index: "asc" }],
-      select: {
-        epNo: true,
-        slug: true,
-        title: true,
-        frameworkSay: true,
-        duration: true,
-        isFree: true,
-      },
-    });
+    const episodes = await listPublishedEpisodes();
 
     return NextResponse.json({ data: episodes });
   } catch {
