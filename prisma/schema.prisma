@@ -1,0 +1,296 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BANNED
+}
+
+enum MembershipStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum MembershipSource {
+  REDEEM
+  MANUAL
+  WXPAY
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  REFUNDED
+  CLOSED
+}
+
+enum PayMethod {
+  REDEEM
+  MANUAL
+  WXPAY
+}
+
+enum ProgressStatus {
+  LEARNING
+  DONE
+}
+
+model User {
+  id              String       @id @default(cuid())
+  email           String       @unique
+  passwordHash    String?      @map("password_hash")
+  nickname        String?
+  avatarUrl       String?      @map("avatar_url")
+  role            Role         @default(USER)
+  status          UserStatus   @default(ACTIVE)
+  emailVerifiedAt DateTime?    @map("email_verified_at")
+  createdAt       DateTime     @default(now()) @map("created_at")
+  memberships     Membership[]
+  orders          Order[]
+  progress        Progress[]
+  favorites       Favorite[]
+  wordbook        Wordbook[]
+  shadows         Shadow[]
+  quizAnswers     QuizAnswer[]
+
+  @@map("users")
+}
+
+model Plan {
+  id           String       @id @default(cuid())
+  code         String       @unique
+  name         String
+  priceCents   Int          @map("price_cents")
+  durationDays Int?         @map("duration_days")
+  level        Int          @default(0)
+  active       Boolean      @default(true)
+  sort         Int          @default(0)
+  memberships  Membership[]
+  orders       Order[]
+  redeemCodes  RedeemCode[]
+
+  @@map("plans")
+}
+
+model Membership {
+  id        String           @id @default(cuid())
+  userId    String           @map("user_id")
+  planId    String           @map("plan_id")
+  status    MembershipStatus @default(ACTIVE)
+  startedAt DateTime         @default(now()) @map("started_at")
+  expiresAt DateTime?        @map("expires_at")
+  source    MembershipSource
+  orderId   String?          @map("order_id")
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan      Plan             @relation(fields: [planId], references: [id])
+
+  @@index([userId, status, expiresAt])
+  @@map("memberships")
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  planId      String      @map("plan_id")
+  amountCents Int         @map("amount_cents")
+  status      OrderStatus @default(PENDING)
+  payMethod   PayMethod   @map("pay_method")
+  tradeNo     String?     @unique @map("trade_no")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  paidAt      DateTime?   @map("paid_at")
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        Plan        @relation(fields: [planId], references: [id])
+
+  @@map("orders")
+}
+
+model RedeemCode {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  planId    String    @map("plan_id")
+  batch     String?
+  usedBy    String?   @map("used_by")
+  usedAt    DateTime? @map("used_at")
+  expiresAt DateTime? @map("expires_at")
+  createdBy String?   @map("created_by")
+  createdAt DateTime  @default(now()) @map("created_at")
+  plan      Plan      @relation(fields: [planId], references: [id])
+
+  @@map("redeem_codes")
+}
+
+model Collection {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  name        String
+  description String?   @map("description")
+  sort        Int       @default(0)
+  episodes    Episode[]
+
+  @@map("collections")
+}
+
+model Episode {
+  id              String        @id @default(cuid())
+  epNo            String        @unique @map("ep_no")
+  collectionId    String        @map("collection_id")
+  index           Int
+  slug            String
+  title           String
+  hook            String?
+  coverTitle      String?       @map("cover_title")
+  coverSub        String?       @map("cover_sub")
+  frameworkPrefix String?       @map("framework_prefix")
+  frameworkSuffix String?       @map("framework_suffix")
+  frameworkSay    String?       @map("framework_say")
+  frameworkZh     String?       @map("framework_zh")
+  frameworkNote   String?       @map("framework_note")
+  quizHint        String?       @map("quiz_hint")
+  outro           String?
+  duration        Int?
+  isFree          Boolean       @default(false) @map("is_free")
+  published       Boolean       @default(false)
+  sort            Int           @default(0)
+  coverKey        String?       @map("cover_key")
+  videoKeyDouyin  String?       @map("video_key_douyin")
+  videoKeyBili    String?       @map("video_key_bili")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  collection      Collection    @relation(fields: [collectionId], references: [id])
+  items           EpisodeItem[]
+  words           EpisodeWord[]
+  mediaAssets     MediaAsset[]
+  progress        Progress[]
+  favorites       Favorite[]
+  shadows         Shadow[]
+  quizAnswers     QuizAnswer[]
+  wordbook        Wordbook[]
+
+  @@unique([collectionId, index])
+  @@index([collectionId, published, sort])
+  @@map("episodes")
+}
+
+model EpisodeItem {
+  id          String  @id @default(cuid())
+  episodeId   String  @map("episode_id")
+  order       Int
+  word        String
+  zh          String
+  audioEnKey  String? @map("audio_en_key")
+  audioZhKey  String? @map("audio_zh_key")
+  backgroundKey String? @map("bg_key")
+  episode     Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@unique([episodeId, order])
+  @@map("episode_items")
+}
+
+model EpisodeWord {
+  id        String  @id @default(cuid())
+  episodeId String  @map("episode_id")
+  order     Int
+  word      String
+  zh        String
+  audioKey  String? @map("audio_key")
+  episode   Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@unique([episodeId, order])
+  @@index([word])
+  @@map("episode_words")
+}
+
+model MediaAsset {
+  id        String  @id @default(cuid())
+  episodeId String  @map("episode_id")
+  kind      String
+  bucket    String
+  objectKey String  @map("object_key")
+  size      Int?
+  mime      String?
+  isPublic  Boolean @default(false) @map("is_public")
+  episode   Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@index([episodeId, kind])
+  @@map("media_assets")
+}
+
+model Progress {
+  userId    String         @map("user_id")
+  episodeId String         @map("episode_id")
+  status    ProgressStatus @default(LEARNING)
+  lastPos   Int            @default(0) @map("last_pos")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode   Episode        @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@id([userId, episodeId])
+  @@map("progress")
+}
+
+model Favorite {
+  userId    String   @map("user_id")
+  episodeId String   @map("episode_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode   Episode  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@id([userId, episodeId])
+  @@map("favorites")
+}
+
+model Wordbook {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  word      String
+  zh        String
+  episodeId String?  @map("episode_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode   Episode? @relation(fields: [episodeId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, word])
+  @@map("wordbook")
+}
+
+model Shadow {
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  episodeId  String   @map("episode_id")
+  itemOrder  Int      @map("item_ord")
+  objectKey  String   @map("object_key")
+  durationMs Int      @map("duration_ms")
+  score      Int?
+  createdAt  DateTime @default(now()) @map("created_at")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode    Episode  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@index([userId, episodeId, createdAt])
+  @@map("shadows")
+}
+
+model QuizAnswer {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  episodeId String   @map("episode_id")
+  itemOrder Int      @map("item_ord")
+  answer    String
+  correct   Boolean
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode   Episode  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@index([userId, episodeId, createdAt])
+  @@map("quiz_answers")
+}
