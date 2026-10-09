@@ -1,0 +1,33 @@
+# 依赖与构建产物
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# 环境变量（含密钥，绝不提交）
+.env
+.env.*
+!.env.example
+
+# Python（导入脚本）
+.venv/
+__pycache__/
+*.pyc
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 日志与临时文件
+*.log
+*.tmp
+
+# 生产数据绝不入库（媒资走 MinIO）
+data/
+backups/
+*.sql.gz
+*.mp4

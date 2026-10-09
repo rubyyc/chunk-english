@@ -1,0 +1,47 @@
+# ============================================================
+#  1Panel 站点 Nginx 附加配置片段
+#  位置：1Panel → 网站 → chunk.rubyc.cn → 配置文件
+#  说明：把下面内容按需并入 server 块；1Panel 生成的默认段不要删
+# ============================================================
+
+# ---------- 若未开 media 子域：把媒资挂在本站的 /media/ 路径 ----------
+# 对应 .env 里 S3_PUBLIC_BASE=https://chunk.rubyc.cn/media/chunk-public
+location /media/ {
+    proxy_pass http://127.0.0.1:9000/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+
+    # 音视频是静态对象，缓存交给浏览器/CDN
+    proxy_cache_valid 200 7d;
+    add_header Cache-Control "public, max-age=604800, immutable";
+
+    # 防盗链：只允许本站与官方平台内嵌
+    valid_referers none blocked chunk.rubyc.cn *.rubyc.cn bilibili.com *.bilibili.com douyin.com *.douyin.com;
+    if ($invalid_referer) { return 403; }
+}
+
+# ---------- 上传体积上限（跟读录音 / 后台传封面）----------
+client_max_body_size 200m;
+
+# ---------- 长连接与超时（视频 Range 请求）----------
+proxy_http_version 1.1;
+proxy_set_header Connection "";
+proxy_buffering off;
+proxy_read_timeout 300s;
+proxy_send_timeout 300s;
+
+# ---------- 静态资源强缓存（Next 产物带 hash，可长期缓存）----------
+location /_next/static/ {
+    proxy_pass http://127.0.0.1:3000;
+    add_header Cache-Control "public, max-age=31536000, immutable";
+}
+
+# ---------- 安全响应头 ----------
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), geolocation=(), microphone=(self)" always;
+
+# ---------- 媒体子域（media.chunk.rubyc.cn）反代到 MinIO 时用这段 ----------
+# 仅允许 GET/HEAD，杜绝匿名写
+# if ($request_method !~ ^(GET|HEAD)$) { return 405; }

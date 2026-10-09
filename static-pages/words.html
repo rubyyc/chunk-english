@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>词库检索 ｜ 苑说英语</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html">苑说英语</a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html" class="active">词库</a>
+      <a href="pricing.html">会员</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="login.html">登录 / 注册</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <section class="hero" style="padding-top:34px;text-align:left">
+      <div class="hero-eyebrow">■ 词库 · WORDS</div>
+      <h1 style="font-size:clamp(24px,4vw,34px)">全站可替换词，一站检索</h1>
+      <p>每个词都来自某一集的框架槽位，点喇叭听发音，点集号回到原集复习</p>
+    </section>
+
+    <section class="section" style="margin-top:24px">
+      <div class="search-box">
+        <input id="wordSearch" class="search-input" type="text" placeholder="搜英文或中文，如 subway / 机场">
+        <button class="btn btn-primary" data-toast="按语义 / 词根检索（二期功能）">搜索</button>
+      </div>
+      <div class="search-count" id="wordCount"></div>
+
+      <div class="card words-table">
+        <div class="words-row" data-word="subway" data-zh="地铁站">
+          <span class="en">subway</span>
+          <span class="zh">地铁站<span class="tag-chip">本集例句</span></span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/01_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="hospital" data-zh="医院">
+          <span class="en">hospital</span>
+          <span class="zh">医院<span class="tag-chip">本集例句</span></span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/02_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="school" data-zh="学校">
+          <span class="en">school</span>
+          <span class="zh">学校<span class="tag-chip">本集例句</span></span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/03_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="gym" data-zh="体育馆">
+          <span class="en">gym</span><span class="zh">体育馆</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w00.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="museum" data-zh="博物馆">
+          <span class="en">museum</span><span class="zh">博物馆</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w01.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="airport" data-zh="机场">
+          <span class="en">airport</span><span class="zh">机场</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w02.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="station" data-zh="车站">
+          <span class="en">station</span><span class="zh">车站</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w03.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="bank" data-zh="银行">
+          <span class="en">bank</span><span class="zh">银行</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w04.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="library" data-zh="图书馆">
+          <span class="en">library</span><span class="zh">图书馆</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w05.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="pharmacy" data-zh="药店">
+          <span class="en">pharmacy</span><span class="zh">药店</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w06.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="supermarket" data-zh="超市">
+          <span class="en">supermarket</span><span class="zh">超市</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w07.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="restroom" data-zh="洗手间">
+          <span class="en">restroom</span><span class="zh">洗手间</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w08.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="park" data-zh="公园">
+          <span class="en">park</span><span class="zh">公园</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w09.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="hotel" data-zh="酒店">
+          <span class="en">hotel</span><span class="zh">酒店</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w11.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="restaurant" data-zh="餐厅">
+          <span class="en">restaurant</span><span class="zh">餐厅</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w12.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="post office" data-zh="邮局">
+          <span class="en">post office</span><span class="zh">邮局</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w13.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="cinema" data-zh="电影院">
+          <span class="en">cinema</span><span class="zh">电影院</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w14.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="cafe" data-zh="咖啡馆">
+          <span class="en">cafe</span><span class="zh">咖啡馆</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w15.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="market" data-zh="菜市场">
+          <span class="en">market</span><span class="zh">菜市场</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w16.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="beach" data-zh="海边">
+          <span class="en">beach</span><span class="zh">海边</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w17.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+        <div class="words-row" data-word="downtown" data-zh="市中心">
+          <span class="en">downtown</span><span class="zh">市中心</span>
+          <span class="from">出自 <a href="episode.html">CK001</a></span>
+          <button class="speak" data-audio="assets/audio/ck001/ext_w19.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        </div>
+      </div>
+
+      <div class="demo-note" style="margin-top:18px">静态 UI 预览：当前仅 CK001 一个已上线单集（20 词）；随日更自动累积，1000 集时约 2 万词。词库页是 GEO 主力页，未来按场景分组。</div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand">苑说英语</div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">学习</p>
+        <p><a href="chunk.html">语块英语合集</a></p>
+        <p><a href="episode.html">第 001 期</a></p>
+        <p><a href="words.html">词库检索</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">账户</p>
+        <p><a href="login.html">登录 / 注册</a></p>
+        <p><a href="me.html">个人中心</a></p>
+        <p><a href="pricing.html">开通会员</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">关于</p>
+        <p>chunk.rubyc.cn</p>
+        <p>视频同款：抖音 / B站 / 视频号</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 静态 UI 预览，非最终上线版本</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

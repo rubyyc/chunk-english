@@ -1,0 +1,79 @@
+# ============================================================
+#  chunk-english · 生产编排
+#  用途：1Panel → 容器 → 编排 → 粘贴本文件
+#
+#  前置：PostgreSQL / MinIO 已由 1Panel「应用商店」装好（独立容器）
+#       本文件只跑应用本身；若你希望把 PG/MinIO 也纳入本编排，见文件末尾注释。
+# ============================================================
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: chunk-english:${IMAGE_TAG:-latest}
+    container_name: chunk-english-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      # ⚠️ 只绑本机，公网入口永远只有 Nginx
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - chunk-net
+      - 1panel-network      # 与 1Panel 装的 postgresql / minio 互通，容器名可直连
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  chunk-net:
+    driver: bridge
+  # 1Panel 应用默认所在的网络；名字以 `docker network ls` 实际输出为准
+  1panel-network:
+    external: true
+
+# ─────────────────────────────────────────────────────────────
+#  附：若要把 PostgreSQL / MinIO 也放进本编排（不用 1Panel 应用商店时）
+#  取消下面的注释，并把 .env 里的主机名改成 postgresql / minio
+#
+#  postgresql:
+#    image: postgres:16-alpine
+#    container_name: chunk-pg
+#    restart: unless-stopped
+#    environment:
+#      POSTGRES_DB: chunk_english
+#      POSTGRES_USER: chunk_user
+#      POSTGRES_PASSWORD: ${PG_PASSWORD:?required}
+#    volumes:
+#      - pg-data:/var/lib/postgresql/data
+#    networks: [chunk-net]
+#
+#  minio:
+#    image: minio/minio:latest
+#    container_name: chunk-minio
+#    restart: unless-stopped
+#    command: server /data --console-address ":9001"
+#    environment:
+#      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+#      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+#    volumes:
+#      - minio-data:/data
+#    ports:
+#      - "127.0.0.1:9000:9000"     # S3 API
+#      - "127.0.0.1:9001:9001"     # 控制台（仅本机/SSH 隧道）
+#    networks: [chunk-net]
+#
+#  volumes:
+#    pg-data:
+#    minio-data:
