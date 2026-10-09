@@ -152,12 +152,14 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
 .outro-panel { padding: 30px; border-left: 5px solid var(--accent); border-radius: 0 16px 16px 0; color: var(--ink-soft); background: var(--surface-soft); font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(22px, 3vw, 31px); }
 .word-guide { margin: -10px 0 18px; }
 .member-lock { margin: 18px 0 0; padding: 13px 16px; border-radius: 12px; color: var(--gold); background: var(--gold-soft); font-size: 14px; }
+.learning-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.learning-actions span { color: var(--green); font-size: 14px; font-weight: 700; }
 .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .word-grid article { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .word-grid strong { display: block; font-family: Georgia, serif; font-size: 19px; }
 .word-grid span { color: var(--muted); font-size: 13px; }
-.auth-page { max-width: 600px; min-height: 62vh; padding: 110px 0; }
-.auth-page h1 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(38px, 6vw, 58px); line-height: 1.16; }
+.auth-page, .dashboard-page { max-width: 760px; min-height: 62vh; padding: 110px 0; }
+.auth-page h1, .dashboard-page h1 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(38px, 6vw, 58px); line-height: 1.16; }
 .auth-page > p { color: var(--ink-soft); }
 .auth-page > p a { color: var(--accent-dark); font-weight: 700; }
 .auth-form { display: grid; gap: 16px; margin: 32px 0 18px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
@@ -166,6 +168,16 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
 .auth-form input:focus, .redeem-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .form-error { margin: 0; color: var(--accent-dark); font-size: 14px; }
 .member-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.learning-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 30px 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--line); }
+.learning-stats div { padding: 20px; background: var(--surface); }
+.learning-stats b { display: block; font-family: Georgia, serif; font-size: 30px; }
+.learning-stats span { color: var(--muted); font-size: 13px; }
+.dashboard-list { padding: 25px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.dashboard-list h2 { font-size: 26px; }
+.dashboard-list a { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.dashboard-list a:last-child { border-bottom: 0; }
+.dashboard-list span { color: var(--accent); font-family: ui-monospace, monospace; font-size: 12px; }
+.dashboard-list em { color: var(--muted); font-size: 13px; font-style: normal; }
 .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .pricing-grid article, .redeem-section { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .pricing-grid .featured { border-color: var(--accent); box-shadow: 0 18px 32px -28px rgba(226,60,32,.8); }

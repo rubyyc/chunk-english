@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { readSession } from "@/lib/session";
+async function episodeId(epNo:string){return prisma.episode.findFirst({where:{epNo:epNo.toUpperCase(),published:true},select:{id:true}})}
+export async function GET(){const s=await readSession();if(!s)return NextResponse.json({error:"请先登录。"},{status:401});return NextResponse.json({data:await prisma.favorite.findMany({where:{userId:s.userId},include:{episode:{select:{epNo:true,title:true,index:true}}},orderBy:{createdAt:"desc"}})})}
+export async function POST(r:Request){const s=await readSession();const b=await r.json().catch(()=>null) as {epNo?:string}|null;if(!s)return NextResponse.json({error:"请先登录。"},{status:401});const ep=b?.epNo&&await episodeId(b.epNo);if(!ep)return NextResponse.json({error:"课程不存在。"},{status:404});return NextResponse.json({data:await prisma.favorite.upsert({where:{userId_episodeId:{userId:s.userId,episodeId:ep.id}},update:{},create:{userId:s.userId,episodeId:ep.id}})},{status:201})}
+export async function DELETE(r:Request){const s=await readSession();const b=await r.json().catch(()=>null) as {epNo?:string}|null;if(!s)return NextResponse.json({error:"请先登录。"},{status:401});const ep=b?.epNo&&await episodeId(b.epNo);if(!ep)return NextResponse.json({error:"课程不存在。"},{status:404});await prisma.favorite.deleteMany({where:{userId:s.userId,episodeId:ep.id}});return NextResponse.json({data:{removed:true}})}

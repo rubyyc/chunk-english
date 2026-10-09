@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { AudioButton } from "@/components/audio-button";
+import { LearningActions } from "@/components/learning-actions";
 import { QuizCard } from "@/components/quiz-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -107,6 +108,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
         </div>
         {!canPlayWordAudio && <p className="member-lock">换词表发音为会员权益。登录并兑换会员后即可逐词播放。</p>}
       </section>
+      {viewer.id && <section className="shell lesson-section"><LearningActions epNo={episode.epNo} words={episode.words.map((word) => ({ word: word.word, zh: word.zh }))} /></section>}
       <SiteFooter />
     </main>
   );

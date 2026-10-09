@@ -1,0 +1,6 @@
+import { ProgressStatus } from "@prisma/client";
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { readSession } from "@/lib/session";
+export async function GET(){const s=await readSession();if(!s)return NextResponse.json({error:"请先登录。"},{status:401});const data=await prisma.progress.findMany({where:{userId:s.userId},include:{episode:{select:{epNo:true,title:true,index:true}}},orderBy:{updatedAt:"desc"}});return NextResponse.json({data})}
+export async function PUT(r:Request){const s=await readSession();if(!s)return NextResponse.json({error:"请先登录。"},{status:401});const b=await r.json().catch(()=>null) as {epNo?:string;status?:"learning"|"done";lastPos?:number}|null;const ep= b?.epNo&&await prisma.episode.findFirst({where:{epNo:b.epNo.toUpperCase(),published:true},select:{id:true}});if(!ep)return NextResponse.json({error:"课程不存在。"},{status:404});const data=await prisma.progress.upsert({where:{userId_episodeId:{userId:s.userId,episodeId:ep.id}},update:{status:b?.status==="done"?ProgressStatus.DONE:ProgressStatus.LEARNING,lastPos:Math.max(0,Math.floor(b?.lastPos??0))},create:{userId:s.userId,episodeId:ep.id,status:b?.status==="done"?ProgressStatus.DONE:ProgressStatus.LEARNING,lastPos:Math.max(0,Math.floor(b?.lastPos??0))}});return NextResponse.json({data})}
