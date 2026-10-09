@@ -1,0 +1,3 @@
+"use client";
+import { FormEvent, useState } from "react";
+export function RedeemForm() { const [message,setMessage]=useState(""); async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();const code=new FormData(e.currentTarget).get("code");const r=await fetch("/api/redeem",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({code})});const j=await r.json();setMessage(r.ok?`兑换成功：${j.data.plan.name}`:(j.error??"兑换失败。"));} return <form className="redeem-form" onSubmit={submit}><input name="code" required placeholder="输入兑换码" /><button className="button button-primary">兑换</button>{message&&<p>{message}</p>}</form>; }

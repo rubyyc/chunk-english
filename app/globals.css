@@ -151,10 +151,28 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
 .quiz-result.retry { color: var(--accent-dark); }
 .outro-panel { padding: 30px; border-left: 5px solid var(--accent); border-radius: 0 16px 16px 0; color: var(--ink-soft); background: var(--surface-soft); font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(22px, 3vw, 31px); }
 .word-guide { margin: -10px 0 18px; }
+.member-lock { margin: 18px 0 0; padding: 13px 16px; border-radius: 12px; color: var(--gold); background: var(--gold-soft); font-size: 14px; }
 .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .word-grid article { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .word-grid strong { display: block; font-family: Georgia, serif; font-size: 19px; }
 .word-grid span { color: var(--muted); font-size: 13px; }
+.auth-page { max-width: 600px; min-height: 62vh; padding: 110px 0; }
+.auth-page h1 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(38px, 6vw, 58px); line-height: 1.16; }
+.auth-page > p { color: var(--ink-soft); }
+.auth-page > p a { color: var(--accent-dark); font-weight: 700; }
+.auth-form { display: grid; gap: 16px; margin: 32px 0 18px; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.auth-form label { display: grid; gap: 6px; color: var(--ink-soft); font-size: 14px; font-weight: 700; }
+.auth-form input, .redeem-form input { min-height: 43px; padding: 9px 12px; border: 1px solid #d8d1c1; border-radius: 10px; background: white; outline: none; }
+.auth-form input:focus, .redeem-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.form-error { margin: 0; color: var(--accent-dark); font-size: 14px; }
+.member-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.pricing-grid article, .redeem-section { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.pricing-grid .featured { border-color: var(--accent); box-shadow: 0 18px 32px -28px rgba(226,60,32,.8); }
+.redeem-section { max-width: 680px; margin-bottom: 88px; }
+.redeem-form { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.redeem-form input { flex: 1 1 260px; }
+.redeem-form p { width: 100%; margin: 0; color: var(--ink-soft); font-size: 14px; }
 .empty-page { min-height: 62vh; padding: 150px 0; }
 .empty-page > p { color: var(--muted); }
 .empty-page .button { margin-top: 18px; }
@@ -182,6 +200,8 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
   .steps article:first-child { border-top: 0; }
   .member-callout, .footer-inner { align-items: flex-start; flex-direction: column; padding: 32px 26px; }
   .member-callout h2 { font-size: 28px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .auth-page { padding: 72px 0; }
   .archive-hero, .lesson-head { padding: 54px 0 30px; }
   .media-section { grid-template-columns: 1fr; gap: 22px; }
   .video-placeholder, .lesson-video, .video-placeholder img { min-height: 250px; }

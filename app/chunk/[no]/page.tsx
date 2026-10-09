@@ -5,7 +5,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { VideoPanel } from "@/components/video-panel";
 import { getPublishedEpisode } from "@/lib/content";
+import { canAccess } from "@/lib/permission";
 import { mediaKey, publicMediaUrl } from "@/lib/media";
+import { getViewer } from "@/lib/viewer";
 
 type EpisodePageProps = {
   params: Promise<{ no: string }>;
@@ -25,9 +27,12 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
     notFound();
   }
 
-  const hookAudio = publicMediaUrl(mediaKey(episode.epNo, "hook"));
-  const teachAudio = publicMediaUrl(mediaKey(episode.epNo, "teach"));
-  const extendAudio = publicMediaUrl(mediaKey(episode.epNo, "extend"));
+  const viewer = await getViewer();
+  const canPlayEpisode = canAccess(viewer, episode, "play");
+  const canPlayWordAudio = viewer.isAdmin || viewer.isMember;
+  const hookAudio = canPlayEpisode ? publicMediaUrl(mediaKey(episode.epNo, "hook")) : null;
+  const teachAudio = canPlayEpisode ? publicMediaUrl(mediaKey(episode.epNo, "teach")) : null;
+  const extendAudio = canPlayWordAudio ? publicMediaUrl(mediaKey(episode.epNo, "extend")) : null;
   const video = episode.videoKeyDouyin ? publicMediaUrl(episode.videoKeyDouyin) : null;
   const cover = episode.coverKey ? publicMediaUrl(episode.coverKey) : null;
 
@@ -96,10 +101,11 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
           {episode.words.map((word) => (
             <article key={word.id}>
               <div><strong>{word.word}</strong><span>{word.zh}</span></div>
-              <AudioButton src={word.audioKey ? publicMediaUrl(word.audioKey) : null} label="发音" />
+              <AudioButton src={canPlayWordAudio && word.audioKey ? publicMediaUrl(word.audioKey) : null} label={canPlayWordAudio ? "发音" : "会员专享"} />
             </article>
           ))}
         </div>
+        {!canPlayWordAudio && <p className="member-lock">换词表发音为会员权益。登录并兑换会员后即可逐词播放。</p>}
       </section>
       <SiteFooter />
     </main>
