@@ -1,9 +1,13 @@
 # ============================================================
-#  chunk-english · 生产编排
+#  chunk-english · 生产编排（已拍板方案）
 #  用途：1Panel → 容器 → 编排 → 粘贴本文件
 #
-#  前置：PostgreSQL / MinIO 已由 1Panel「应用商店」装好（独立容器）
-#       本文件只跑应用本身；若你希望把 PG/MinIO 也纳入本编排，见文件末尾注释。
+#  依赖（均不由本编排创建）：
+#   - PostgreSQL：🔴 用 1Panel 自带的 PG 容器（如 1Panel-postgresql-Htbt），
+#     先在 1Panel → 数据库 建 chunk_english 库；app 加入 1panel-network 容器名直连
+#   - MinIO：1Panel 应用商店安装的独立容器（容器名 1Panel-minio-xxxx），
+#     同样走 1panel-network 直连
+#  本文件只跑应用本身（Next.js standalone）。
 # ============================================================
 
 services:
@@ -39,41 +43,7 @@ services:
 networks:
   chunk-net:
     driver: bridge
-  # 1Panel 应用默认所在的网络；名字以 `docker network ls` 实际输出为准
+  # 1Panel 自带 PG 与应用商店 MinIO 都在这个网络里，容器名直连
+  # 名字以 `docker network ls` 实际输出为准
   1panel-network:
     external: true
-
-# ─────────────────────────────────────────────────────────────
-#  附：若要把 PostgreSQL / MinIO 也放进本编排（不用 1Panel 应用商店时）
-#  取消下面的注释，并把 .env 里的主机名改成 postgresql / minio
-#
-#  postgresql:
-#    image: postgres:16-alpine
-#    container_name: chunk-pg
-#    restart: unless-stopped
-#    environment:
-#      POSTGRES_DB: chunk_english
-#      POSTGRES_USER: chunk_user
-#      POSTGRES_PASSWORD: ${PG_PASSWORD:?required}
-#    volumes:
-#      - pg-data:/var/lib/postgresql/data
-#    networks: [chunk-net]
-#
-#  minio:
-#    image: minio/minio:latest
-#    container_name: chunk-minio
-#    restart: unless-stopped
-#    command: server /data --console-address ":9001"
-#    environment:
-#      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-#      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-#    volumes:
-#      - minio-data:/data
-#    ports:
-#      - "127.0.0.1:9000:9000"     # S3 API
-#      - "127.0.0.1:9001:9001"     # 控制台（仅本机/SSH 隧道）
-#    networks: [chunk-net]
-#
-#  volumes:
-#    pg-data:
-#    minio-data:

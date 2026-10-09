@@ -1,7 +1,7 @@
 # chunk-english · 苑说英语官网
 
 > 与短视频内容 1:1 对齐的英语学习站。视频是钩子，网站是承接与留存。
-> 域名：**chunk.rubyc.cn** ｜ 部署：**1Panel** ｜ 媒资：**独立 MinIO 容器**
+> 域名：**chunk.rubyc.cn** ｜ 部署：**1Panel 自带 PostgreSQL + Docker + 1Panel 网站反代** ｜ 媒资：**独立 MinIO 容器**
 
 ---
 
@@ -86,6 +86,6 @@
 
 ## 六、关键决策状态
 
-**已定**：Next.js 15 全栈单体 + Prisma + PostgreSQL 16 + 独立 MinIO；1Panel 部署；视觉 = 暖纸编辑风 v3（朱红 #E23C20 / 暖墨 #181613 / 纸白 #FBF9F5，真源 `static-pages/styles.css`）。
+**已定**：Next.js 15 全栈单体 + Prisma + **1Panel 自带 PostgreSQL**（容器名直连，不新装）+ 独立 MinIO 容器（应用商店安装）；应用 Docker 化，**1Panel 网站反向代理 `chunk.rubyc.cn`**；视觉 = 暖纸编辑风 v3（朱红 #E23C20 / 暖墨 #181613 / 纸白 #FBF9F5，真源 `static-pages/styles.css`）。
 
 **默认推进中**（静态 UI 已按此实现，正式开发前可与用户确认）：免费前 5 集 ｜ 站内直连 MinIO 播放 ｜ 一期兑换码 + 手动开通 ｜ 跟读一期只录音回放。完整决策记录见 [docs/06 §3](docs/06-开发交接指南.md)。

@@ -45,7 +45,8 @@
 
 ## 关键硬约束（速览，违反即返工）
 
-- **技术栈（已定）**：Next.js 15 全栈单体 + Prisma + PostgreSQL 16 + 独立 MinIO 容器。不引入第二个后端语言。
+- **技术栈（已定）**：Next.js 15 全栈单体 + Prisma + PostgreSQL + 独立 MinIO 容器。不引入第二个后端语言。
+- **部署（已拍板）**：数据库用 **1Panel 自带 PostgreSQL**（容器名直连，不新装）；应用 Docker 化（`deploy/docker-compose.yml`）；公网入口 = **1Panel 网站反向代理 `chunk.rubyc.cn` → 127.0.0.1:3000**；MinIO 用 1Panel 应用商店安装的独立容器。
 - **视觉令牌（v3 暖纸编辑风）**：朱红 `#E23C20` ｜ 暖墨 `#181613` ｜ 纸白 `#FBF9F5`。
   设计系统真源 = `static-pages/styles.css` 顶部 `:root` 变量。改色改这里，不要在页面里写死。
 - **品牌标识**：`static-pages/assets/logo/`（mark / logo / logo-white / favicon，SVG）。页面 brand 一律用 `<img>` 引用，不手写文字 logo。
