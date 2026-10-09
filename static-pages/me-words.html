@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生词本 ｜ 苑说英语</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
+      <a href="pricing.html">会员</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-primary btn-sm" href="me.html">yuanchang</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <div class="sec-head" style="margin-top:28px">
+      <div class="sec-title">我的学习</div>
+      <div class="sec-sub">在单集里点「加入生词本」的词都会出现在这里</div>
+    </div>
+
+    <nav class="me-tabs">
+      <a href="me.html">总览</a>
+      <a href="me-progress.html">学习进度</a>
+      <a href="me-words.html" class="on">生词本</a>
+      <a href="me-records.html">跟读记录</a>
+      <a href="me-settings.html">账户设置</a>
+    </nav>
+
+    <div class="page-title">生词本 <span style="font-size:14px;color:var(--muted);font-weight:500">· 共 6 词</span></div>
+
+    <!-- 筛选 + 搜索 -->
+    <div class="search-box">
+      <input type="text" class="search-input" placeholder="搜索单词或释义…" id="wordSearch" oninput="filterWords()">
+      <button class="btn btn-ghost" data-toast="已按掌握度筛选（演示）">仅未掌握</button>
+    </div>
+
+    <!-- 生词列表 -->
+    <div class="card words-table" id="wordList" style="margin-top:14px">
+      <div class="words-row" data-word="subway" data-zh="地铁站">
+        <button class="speak" data-audio="assets/audio/ck001/01_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">subway</span>
+        <span class="zh">地铁站</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+      <div class="words-row" data-word="gym" data-zh="体育馆">
+        <button class="speak" data-audio="assets/audio/ck001/ext_w00.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">gym</span>
+        <span class="zh">体育馆</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+      <div class="words-row" data-word="airport" data-zh="机场">
+        <button class="speak" data-audio="assets/audio/ck001/ext_w02.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">airport</span>
+        <span class="zh">机场</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+      <div class="words-row" data-word="library" data-zh="图书馆">
+        <button class="speak" data-audio="assets/audio/ck001/ext_w05.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">library</span>
+        <span class="zh">图书馆</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+      <div class="words-row" data-word="hospital" data-zh="医院">
+        <button class="speak" data-audio="assets/audio/ck001/02_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">hospital</span>
+        <span class="zh">医院</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+      <div class="words-row" data-word="school" data-zh="学校">
+        <button class="speak" data-audio="assets/audio/ck001/03_en.mp3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button>
+        <span class="en">school</span>
+        <span class="zh">学校</span>
+        <span class="tag-chip">CK001</span>
+        <button class="pill-btn" data-toast="已标记为掌握">标记掌握</button>
+        <button class="pill-btn danger" data-toast="已移出生词本">删除</button>
+      </div>
+    </div>
+
+    <div class="empty" id="emptyState" style="display:none">
+      <div class="big">🔍</div>没有匹配的生词
+    </div>
+
+    <!-- 一键复习 -->
+    <section class="section">
+      <div class="vip-banner" style="padding:24px">
+        <div>
+          <h3>一键复习全部生词</h3>
+          <p>按顺序播放这 6 个词的发音，边听边默写</p>
+        </div>
+        <button class="btn btn-primary" data-toast="开始顺序播放生词（演示）">开始复习</button>
+      </div>
+    </section>
+
+    <div class="demo-note">静态 UI 预览：生词列表为演示数据。搜索框可实时筛选下方词条。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">学习</p>
+        <p><a href="chunk.html">语块英语合集</a></p>
+        <p><a href="episode.html">第 001 期</a></p>
+        <p><a href="words.html">词库检索</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">账户</p>
+        <p><a href="login.html">登录 / 注册</a></p>
+        <p><a href="me.html">个人中心</a></p>
+        <p><a href="pricing.html">开通会员</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
+        <p>chunk.rubyc.cn</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 静态 UI 预览，非最终上线版本</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+function filterWords() {
+  var q = (document.getElementById('wordSearch').value || '').trim().toLowerCase();
+  var rows = document.querySelectorAll('#wordList .words-row');
+  var visible = 0;
+  rows.forEach(function (r) {
+    var w = (r.getAttribute('data-word') || '').toLowerCase();
+    var z = (r.getAttribute('data-zh') || '').toLowerCase();
+    var show = !q || w.indexOf(q) > -1 || z.indexOf(q) > -1;
+    r.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('emptyState').style.display = visible ? 'none' : 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习进度 ｜ 苑说英语</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
+      <a href="pricing.html">会员</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-primary btn-sm" href="me.html">yuanchang</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <div class="sec-head" style="margin-top:28px">
+      <div class="sec-title">我的学习</div>
+      <div class="sec-sub">每天两分钟，连续坚持就是复利</div>
+    </div>
+
+    <nav class="me-tabs">
+      <a href="me.html">总览</a>
+      <a href="me-progress.html" class="on">学习进度</a>
+      <a href="me-words.html">生词本</a>
+      <a href="me-records.html">跟读记录</a>
+      <a href="me-settings.html">账户设置</a>
+    </nav>
+
+    <div class="page-title">学习进度</div>
+
+    <!-- 打卡日历（简化为 7 天条） -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">本周打卡</div><div class="sec-sub">已坚持 1 天，还差 6 天解锁「一周不辍」徽章</div></div>
+      <div class="card" style="padding:20px">
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;text-align:center">
+          <div><div style="height:42px;border-radius:8px;background:var(--accent-soft);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--accent);font-weight:800">✓</div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周一</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8">今</div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周二</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8"></div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周三</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8"></div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周四</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8"></div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周五</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8"></div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周六</span></div>
+          <div><div style="height:42px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:#C2C2C8"></div><span style="font-size:11px;color:var(--muted);display:block;margin-top:6px">周日</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学习数据统计 -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">累计数据</div></div>
+      <div class="stat-strip">
+        <div class="stat-cell"><b>1<i></i></b><span>已学单集</span></div>
+        <div class="stat-cell"><b>4<i></i></b><span>掌握框架</span></div>
+        <div class="stat-cell"><b>8<i></i></b><span>开口跟读</span></div>
+        <div class="stat-cell"><b class="accent">100<i>%</i></b><span>出题正确率</span></div>
+        <div class="stat-cell"><b>6<i></i></b><span>加入生词</span></div>
+        <div class="stat-cell"><b>2<i>分</i></b><span>累计学习时长</span></div>
+      </div>
+    </section>
+
+    <!-- 按集进度 -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">单集进度</div></div>
+      <div class="card" style="overflow:hidden">
+        <table class="tbl">
+          <thead><tr><th>集号</th><th>标题</th><th>框架</th><th>换词点读</th><th>出题</th><th>进度</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="en">CK001</td>
+              <td>问路，这一句就够</td>
+              <td><span style="color:var(--ok);font-weight:700">✓</span></td>
+              <td class="num">8 / 20</td>
+              <td><span style="color:var(--ok);font-weight:700">3 / 3</span></td>
+              <td><b style="color:var(--accent)">进行中</b></td>
+            </tr>
+            <tr style="opacity:.5">
+              <td class="en">—</td>
+              <td>暂无更多</td><td>—</td><td>—</td><td>—</td><td>未开始</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 徽章 -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">学习徽章</div><div class="sec-sub">坚持就会一个个亮起来</div></div>
+      <div class="steps">
+        <div class="card step" style="text-align:center">
+          <div style="font-size:30px">🌱</div>
+          <h3 style="margin:8px 0 2px;font-size:14px">初学者</h3>
+          <p style="font-size:12px">完成第 1 集</p>
+          <p style="font-size:11px;color:var(--ok);margin-top:4px">已解锁</p>
+        </div>
+        <div class="card step" style="text-align:center;opacity:.55">
+          <div style="font-size:30px">🔥</div>
+          <h3 style="margin:8px 0 2px;font-size:14px">一周不辍</h3>
+          <p style="font-size:12px">连续打卡 7 天</p>
+          <p style="font-size:11px;color:var(--muted);margin-top:4px">1 / 7</p>
+        </div>
+        <div class="card step" style="text-align:center;opacity:.55">
+          <div style="font-size:30px">📚</div>
+          <h3 style="margin:8px 0 2px;font-size:14px">词汇百夫长</h3>
+          <p style="font-size:12px">生词本累计 100 词</p>
+          <p style="font-size:11px;color:var(--muted);margin-top:4px">6 / 100</p>
+        </div>
+        <div class="card step" style="text-align:center;opacity:.55">
+          <div style="font-size:30px">🎯</div>
+          <h3 style="margin:8px 0 2px;font-size:14px">满分连击</h3>
+          <p style="font-size:12px">出题连续 10 题全对</p>
+          <p style="font-size:11px;color:var(--muted);margin-top:4px">3 / 10</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="demo-note">静态 UI 预览：打卡与统计数据为演示值，正式版按真实学习行为记录。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">学习</p>
+        <p><a href="chunk.html">语块英语合集</a></p>
+        <p><a href="episode.html">第 001 期</a></p>
+        <p><a href="words.html">词库检索</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">账户</p>
+        <p><a href="login.html">登录 / 注册</a></p>
+        <p><a href="me.html">个人中心</a></p>
+        <p><a href="pricing.html">开通会员</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
+        <p>chunk.rubyc.cn</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 静态 UI 预览，非最终上线版本</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

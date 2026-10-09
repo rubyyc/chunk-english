@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 96">
+  <path fill="#E23C20" d="M22 8h52a14 14 0 0 1 14 14v28a14 14 0 0 1-14 14H50L28 86l-2-22h-4a14 14 0 0 1-14-14V22A14 14 0 0 1 22 8Z"/>
+  <rect x="26" y="29" width="44" height="14" rx="7" fill="#FFFFFF"/>
+  <text x="110" y="57" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="42" font-weight="800" letter-spacing="3" fill="#FFFFFF">苑说英语</text>
+  <text x="112" y="82" font-family="'Helvetica Neue',Arial,sans-serif" font-size="12.5" font-weight="600" letter-spacing="6.5" fill="rgba(255,255,255,.55)">CHUNK ENGLISH</text>
+</svg>

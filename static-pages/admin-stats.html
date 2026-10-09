@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>后台概览 ｜ 苑说英语</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="index.html">返回前台</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <div class="adm-tag">后台管理 · ADMIN</div>
+    <div class="page-title" style="margin-top:6px">概览</div>
+
+    <nav class="adm-nav">
+      <a href="admin-stats.html" class="on">概览</a>
+      <a href="admin-episodes.html">内容管理</a>
+      <a href="admin-members.html">会员管理</a>
+      <a href="admin-codes.html">兑换码</a>
+    </nav>
+
+    <!-- 核心指标卡 -->
+    <div class="adm-cards">
+      <div class="card adm-card">
+        <div class="k">注册用户<span style="color:var(--ok)">↑12%</span></div>
+        <div class="v">128</div>
+        <div class="t up">本周新增 14</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">付费会员<span style="color:var(--ok)">↑8%</span></div>
+        <div class="v">23</div>
+        <div class="t up">转化率 18%</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">单集学习次</div>
+        <div class="v">461</div>
+        <div class="t up">日均 66</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">跟读录音</div>
+        <div class="v">87</div>
+        <div class="t up">日均 12</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">内容数</div>
+        <div class="v">1</div>
+        <div class="t">已发布单集</div>
+      </div>
+    </div>
+
+    <!-- 趋势 + 实时动态 -->
+    <div class="adm-2col">
+      <div class="card">
+        <div style="padding:18px 20px 0;font-weight:700;font-size:15px">近 7 日学习次数</div>
+        <div class="bars">
+          <div class="bar-col"><div class="bar" style="height:42%"></div><span>周一</span></div>
+          <div class="bar-col"><div class="bar" style="height:68%"></div><span>周二</span></div>
+          <div class="bar-col"><div class="bar" style="height:55%"></div><span>周三</span></div>
+          <div class="bar-col"><div class="bar" style="height:80%"></div><span>周四</span></div>
+          <div class="bar-col"><div class="bar" style="height:96%"></div><span>周五</span></div>
+          <div class="bar-col"><div class="bar hot" style="height:100%"></div><span>周六</span></div>
+          <div class="bar-col"><div class="bar" style="height:48%"></div><span>周日</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="padding:18px 20px 0;font-weight:700;font-size:15px">实时动态</div>
+        <div class="feed">
+          <div class="feed-item"><span class="dot g"></span><div>新用户注册 <b>learner_88</b></div><time>2 分钟前</time></div>
+          <div class="feed-item"><span class="dot r"></span><div>CK001 被学习（第 8 次今日）</div><time>5 分钟前</time></div>
+          <div class="feed-item"><span class="dot b"></span><div>会员开通 <b>年费</b> · 兑换码 CHUNKA</div><time>14 分钟前</time></div>
+          <div class="feed-item"><span class="dot g"></span><div>跟读录音上传 · subway</div><time>22 分钟前</time></div>
+          <div class="feed-item"><span class="dot r"></span><div>CK001 出题全对 · 满分连击 +1</div><time>38 分钟前</time></div>
+          <div class="feed-item"><span class="dot"></span><div>兑换码 CHUNKA 已生成 50 张</div><time>1 小时前</time></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 内容热度 -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">内容热度</div><div class="sec-sub">按学习次数排序</div></div>
+      <div class="card" style="overflow:hidden">
+        <table class="tbl">
+          <thead><tr><th>集号</th><th>标题</th><th>学习次</th><th>完播率</th><th>出题参与</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="en">CK001</td>
+              <td>问路，这一句就够</td>
+              <td class="num">461</td>
+              <td class="num">82%</td>
+              <td class="num">318</td>
+              <td><span class="badge badge-free">已发布</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="demo-note">静态 UI 预览：后台数据为演示值。正式后台需登录管理员账号，数据来自 PostgreSQL。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">前台</p>
+        <p><a href="index.html">首页</a></p>
+        <p><a href="chunk.html">语块英语</a></p>
+        <p><a href="words.html">词库</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">后台</p>
+        <p><a href="admin-stats.html">概览</a></p>
+        <p><a href="admin-episodes.html">内容管理</a></p>
+        <p><a href="admin-members.html">会员管理</a></p>
+        <p><a href="admin-codes.html">兑换码</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
+        <p>chunk.rubyc.cn</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 后台静态预览</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

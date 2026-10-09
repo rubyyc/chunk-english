@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>内容管理 ｜ 苑说英语</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="index.html">返回前台</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <div class="adm-tag">后台管理 · ADMIN</div>
+    <div class="page-title" style="margin-top:6px">内容管理</div>
+
+    <nav class="adm-nav">
+      <a href="admin-stats.html">概览</a>
+      <a href="admin-episodes.html" class="on">内容管理</a>
+      <a href="admin-members.html">会员管理</a>
+      <a href="admin-codes.html">兑换码</a>
+    </nav>
+
+    <!-- 工具栏 -->
+    <div class="adm-toolbar">
+      <input type="text" class="search-input" placeholder="搜索单集标题 / 集号…">
+      <button class="pill-btn">全部</button>
+      <button class="pill-btn" style="background:var(--ink);color:#fff;border-color:var(--ink)">已发布</button>
+      <button class="pill-btn">草稿</button>
+      <button class="pill-btn">已下线</button>
+      <div class="spacer" style="flex:1"></div>
+      <button class="btn btn-primary btn-sm" data-toast="演示：将上传 content JSON 并导入音频到 MinIO">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        导入单集
+      </button>
+    </div>
+
+    <!-- 单集列表 -->
+    <div class="card" style="margin-top:16px;overflow:hidden">
+      <table class="tbl">
+        <thead><tr><th>集号</th><th>标题</th><th>框架</th><th>替换词数</th><th>音频状态</th><th>学习次</th><th>更新时间</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="en">CK001</td>
+            <td>问路，这一句就够</td>
+            <td class="en" style="font-size:12.5px;color:var(--ink-2)">How do I get to the ___</td>
+            <td class="num">20</td>
+            <td><span class="badge badge-free">齐全</span></td>
+            <td class="num">461</td>
+            <td class="num">2026-10-09</td>
+            <td><span class="badge badge-free">已发布</span></td>
+            <td class="ops">
+              <a class="pill-btn" href="episode.html" target="_blank">预览</a>
+              <button class="pill-btn" data-toast="演示：编辑单集元数据">编辑</button>
+              <button class="pill-btn danger" data-toast="演示：下线后前台不再展示">下线</button>
+            </td>
+          </tr>
+          <tr style="opacity:.6">
+            <td class="en">CK002</td>
+            <td>（草稿）点单，这一句就够</td>
+            <td class="en" style="font-size:12.5px;color:var(--ink-2)">I'd like to order ___</td>
+            <td class="num">0</td>
+            <td><span class="badge badge-soon">未导入</span></td>
+            <td class="num">—</td>
+            <td class="num">—</td>
+            <td><span class="badge badge-soon">草稿</span></td>
+            <td class="ops">
+              <button class="pill-btn" data-toast="演示：补全音频后即可发布">补全音频</button>
+              <button class="pill-btn" data-toast="演示：发布到前台">发布</button>
+              <button class="pill-btn danger" data-toast="演示：删除草稿">删除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 导入流程说明 -->
+    <section class="section">
+      <div class="card" style="padding:24px 26px">
+        <div class="sec-title" style="font-size:16px;margin-bottom:12px">导入单集流程</div>
+        <div class="steps" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+          <div class="step" style="padding:18px 16px">
+            <span class="step-num">1</span>
+            <h3 style="margin:10px 0 2px;font-size:14px">上传 JSON</h3>
+            <p style="font-size:12.5px">content/CKxxx.json，解析框架与替换词</p>
+          </div>
+          <div class="step" style="padding:18px 16px">
+            <span class="step-num">2</span>
+            <h3 style="margin:10px 0 2px;font-size:14px">音频入 MinIO</h3>
+            <p style="font-size:12.5px">00_teach / 例句 / ext_w* 上传到 audio/ckxxx/ 桶</p>
+          </div>
+          <div class="step" style="padding:18px 16px">
+            <span class="step-num">3</span>
+            <h3 style="margin:10px 0 2px;font-size:14px">校验完整性</h3>
+            <p style="font-size:12.5px">缺音频的词标记「未导入」，阻断发布</p>
+          </div>
+          <div class="step" style="padding:18px 16px">
+            <span class="step-num">4</span>
+            <h3 style="margin:10px 0 2px;font-size:14px">发布上线</h3>
+            <p style="font-size:12.5px">设 ready=true，前台立即可学</p>
+          </div>
+        </div>
+        <div class="demo-note" style="margin-top:16px">导入命令（待开发）：python chunk-english/scripts/import_episode.py --ep CK002 --video-root ~/WorkBuddy/英语短视频 --upload --db</div>
+      </div>
+    </section>
+
+    <div class="demo-note">静态 UI 预览：列表为演示数据。导入功能正式版对接 MinIO + PostgreSQL。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">前台</p>
+        <p><a href="index.html">首页</a></p>
+        <p><a href="chunk.html">语块英语</a></p>
+        <p><a href="words.html">词库</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">后台</p>
+        <p><a href="admin-stats.html">概览</a></p>
+        <p><a href="admin-episodes.html">内容管理</a></p>
+        <p><a href="admin-members.html">会员管理</a></p>
+        <p><a href="admin-codes.html">兑换码</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
+        <p>chunk.rubyc.cn</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 后台静态预览</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

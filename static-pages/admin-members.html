@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员管理 ｜ 苑说英语</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="chunk.html">语块英语</a>
+      <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn btn-ghost btn-sm" href="index.html">返回前台</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+
+    <div class="adm-tag">后台管理 · ADMIN</div>
+    <div class="page-title" style="margin-top:6px">会员管理</div>
+
+    <nav class="adm-nav">
+      <a href="admin-stats.html">概览</a>
+      <a href="admin-episodes.html">内容管理</a>
+      <a href="admin-members.html" class="on">会员管理</a>
+      <a href="admin-codes.html">兑换码</a>
+    </nav>
+
+    <!-- 会员概览卡 -->
+    <div class="adm-cards">
+      <div class="card adm-card">
+        <div class="k">总会员</div>
+        <div class="v">23</div>
+        <div class="t up">↑ 本月 +5</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">年费会员</div>
+        <div class="v">15</div>
+        <div class="t">占比 65%</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">季费会员</div>
+        <div class="v">6</div>
+        <div class="t">占比 26%</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">本月到期</div>
+        <div class="v" style="color:var(--accent)">2</div>
+        <div class="t down">需续费提醒</div>
+      </div>
+      <div class="card adm-card">
+        <div class="k">待续费</div>
+        <div class="v">2</div>
+        <div class="t">已发提醒</div>
+      </div>
+    </div>
+
+    <!-- 工具栏 -->
+    <div class="adm-toolbar">
+      <input type="text" class="search-input" placeholder="搜索昵称 / 邮箱…">
+      <button class="pill-btn">全部</button>
+      <button class="pill-btn" style="background:var(--ink);color:#fff;border-color:var(--ink)">年费</button>
+      <button class="pill-btn">季费</button>
+      <button class="pill-btn">免费用户</button>
+      <div class="spacer" style="flex:1"></div>
+      <button class="btn btn-primary btn-sm" data-toast="演示：手动为指定用户开通/续费会员">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>手动开通
+      </button>
+    </div>
+
+    <!-- 会员列表 -->
+    <div class="card" style="margin-top:16px;overflow:hidden">
+      <table class="tbl">
+        <thead><tr><th>昵称</th><th>邮箱</th><th>等级</th><th>到期日</th><th>来源</th><th>注册日</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="en">yuanchang</td>
+            <td class="num">yuanchang@…</td>
+            <td><span class="badge badge-vip">年费</span></td>
+            <td class="num">2027-10-09</td>
+            <td>兑换码</td>
+            <td class="num">2026-10-08</td>
+            <td><span style="color:var(--ok);font-weight:600">生效中</span></td>
+            <td class="ops">
+              <button class="pill-btn" data-toast="演示：延长到期日">续期</button>
+              <button class="pill-btn danger" data-toast="演示：撤销会员资格">撤销</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="en">learner_88</td>
+            <td class="num">88@…</td>
+            <td><span class="badge badge-vip">年费</span></td>
+            <td class="num">2027-10-07</td>
+            <td>兑换码</td>
+            <td class="num">2026-10-09</td>
+            <td><span style="color:var(--ok);font-weight:600">生效中</span></td>
+            <td class="ops"><button class="pill-btn" data-toast="演示：续期">续期</button><button class="pill-btn danger" data-toast="演示：撤销">撤销</button></td>
+          </tr>
+          <tr>
+            <td class="en">tom_study</td>
+            <td class="num">tom@…</td>
+            <td><span class="badge badge-vip">季费</span></td>
+            <td class="num" style="color:var(--accent)">2026-10-30</td>
+            <td>兑换码</td>
+            <td class="num">2026-10-02</td>
+            <td><span style="color:var(--accent);font-weight:600">即将到期</span></td>
+            <td class="ops"><button class="pill-btn" data-toast="演示：续期">续期</button><button class="pill-btn danger" data-toast="演示：撤销">撤销</button></td>
+          </tr>
+          <tr style="opacity:.7">
+            <td class="en">guest_05</td>
+            <td class="num">—</td>
+            <td><span class="badge badge-soon">免费</span></td>
+            <td class="num">—</td>
+            <td>微信</td>
+            <td class="num">2026-10-09</td>
+            <td>未付费</td>
+            <td class="ops"><button class="pill-btn" data-toast="演示：手动开通">开通</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 到期提醒队列 -->
+    <section class="section">
+      <div class="sec-head"><div class="sec-title">到期提醒队列</div><div class="sec-sub">提前 7 天邮件提醒，提前 1 天再次提醒</div></div>
+      <div class="card" style="overflow:hidden">
+        <table class="tbl">
+          <thead><tr><th>昵称</th><th>等级</th><th>到期日</th><th>提醒状态</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td class="en">tom_study</td><td>季费</td><td class="num">2026-10-30</td><td><span style="color:var(--ok)">已提醒（10-23）</span></td><td class="ops"><button class="pill-btn" data-toast="演示：再次发送提醒">再次提醒</button></td></tr>
+            <tr><td class="en">amy_eng</td><td>季费</td><td class="num">2026-10-15</td><td><span style="color:var(--accent)">今日到期，未续</span></td><td class="ops"><button class="pill-btn" data-toast="演示：再次发送提醒">再次提醒</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="demo-note">静态 UI 预览：会员数据为演示值。正式后台对接 PostgreSQL user/membership 表，开通走兑换码或手动写入。</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
+    <div class="cols">
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">前台</p>
+        <p><a href="index.html">首页</a></p>
+        <p><a href="chunk.html">语块英语</a></p>
+        <p><a href="words.html">词库</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">后台</p>
+        <p><a href="admin-stats.html">概览</a></p>
+        <p><a href="admin-episodes.html">内容管理</a></p>
+        <p><a href="admin-members.html">会员管理</a></p>
+        <p><a href="admin-codes.html">兑换码</a></p>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
+        <p>chunk.rubyc.cn</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 苑说英语 · 后台静态预览</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

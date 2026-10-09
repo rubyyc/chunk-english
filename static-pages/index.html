@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>苑说英语 · 每天 2 分钟，把英语从「学过」变成「说得出」</title>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="topbar">
   <div class="container topbar-inner">
-    <a class="brand" href="index.html">苑说英语</a>
+    <a class="brand" href="index.html"><img src="assets/logo/logo.svg" alt="苑说英语"></a>
     <nav class="nav">
       <a href="index.html" class="active">首页</a>
       <a href="chunk.html">语块英语</a>
       <a href="words.html">词库</a>
+      <a href="about.html">关于</a>
       <a href="pricing.html">会员</a>
     </nav>
     <div class="spacer"></div>
@@ -25,52 +27,84 @@
 <main class="page">
   <div class="container">
 
-    <section class="hero">
-      <div class="hero-eyebrow">■ 语块英语 · CHUNK ENGLISH</div>
-      <h1>每天 2 分钟，把英语<br>从<em>「学过」</em>变成<em>「说得出」</em></h1>
-      <p>每集只讲一个万能句式。框架记住，槽位随便换。</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="episode.html">开始学第 001 期</a>
-        <a class="btn btn-ghost" href="chunk.html">浏览全部单集</a>
+    <section class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">■ 语块英语 · CHUNK ENGLISH</div>
+        <h1>每天 2 分钟，把英语<br>从<em>「学过」</em>变成<em>「说得出」</em></h1>
+        <p>每集只讲一个万能句式。框架记住，槽位随便换。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="episode.html">开始学第 001 期</a>
+          <a class="btn btn-ghost" href="chunk.html">浏览全部单集</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ 前 5 集完全免费</span>
+          <span>✓ 视频同款内容</span>
+          <span>✓ 无需下载 App</span>
+        </div>
       </div>
+
+      <div class="card demo-card">
+        <div class="framework-tag">万能句式 · 试一试</div>
+        <div class="demo-fw">
+          <span>How do I get to the</span>
+          <input id="heroSlot" class="slot-input" type="text" placeholder="地点" autocomplete="off" spellcheck="false">
+          <span>?</span>
+        </div>
+        <div class="demo-zh">我怎么去<b id="heroZh">…</b>？</div>
+        <div class="demo-note-line">在框里随便打一个地点，点「听发音」</div>
+        <div class="demo-chips">
+          <button class="chip" data-word="subway">subway</button>
+          <button class="chip" data-word="gym">gym</button>
+          <button class="chip" data-word="airport">airport</button>
+          <button class="chip" data-word="downtown">downtown</button>
+        </div>
+        <div class="demo-acts">
+          <button class="btn btn-primary btn-sm" id="heroPlay">听发音</button>
+          <a class="btn btn-ghost btn-sm" href="episode.html">进这集完整学 →</a>
+        </div>
+        <div class="demo-caption">
+          这就是「语块」：<b>记住一个框架，换掉槽位就是新句子</b>。
+          每集给你 1 个框架 + 3 个例句 + 20 个换词，看完真的多会 20 句话。
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-strip">
+      <div class="stat-cell"><b>1<i> 个</i></b><span>万能句式框架</span></div>
+      <div class="stat-cell"><b>3<i> 句</i></b><span>例句跟读</span></div>
+      <div class="stat-cell"><b class="accent">20<i> 词</i></b><span>可替换换词</span></div>
+      <div class="stat-cell"><b>60<i> 秒</i></b><span>单集时长</span></div>
+      <div class="stat-cell"><b>日更</b><span>持续连载</span></div>
     </section>
 
     <section class="section">
       <div class="sec-head">
         <div class="sec-title">今日一集</div>
-        <div class="sec-sub">跟着视频，在网页上练完</div>
+        <div class="sec-sub">NO.001 · 问路，这一句就够</div>
       </div>
-      <div class="ep-grid">
-        <a class="ep-card" href="episode.html">
-          <div class="ep-thumb">
-            <img src="assets/covers/ck001.png" alt="第 001 期">
-            <span class="badge badge-free">免费</span>
-            <span class="ep-no">NO.001</span>
-          </div>
-          <div class="ep-body">
-            <div class="ep-title">问路，这一句就够</div>
-            <div class="ep-fw">How do I get to the ___?</div>
-            <div class="ep-meta"><span>64 秒</span><span>·</span><span>20 个换词</span></div>
-          </div>
+      <div class="card today-card">
+        <a class="ep-thumb" href="episode.html">
+          <img src="assets/covers/ck001.png" alt="第 001 期封面">
+          <span class="badge badge-free">免费</span>
         </a>
-        <a class="ep-card locked" href="episode.html">
-          <div class="ep-thumb">
-            <img src="assets/cards/card_98_extend.png" alt="第 002 期（预览图）">
-            <span class="badge badge-vip">会员</span>
-            <span class="ep-no">NO.002</span>
+        <div>
+          <h3 style="font-size:22px">问路，这一句就够</h3>
+          <p style="color:var(--muted);font-size:14.5px;margin-top:6px">
+            How do I get to the ___? —— 换掉地点，句子照样能用。
+            出国问路、打车报地点，这一句全覆盖。
+          </p>
+          <div class="flow-chips">
+            <span class="flow-chip"><b>①</b> 听框架</span>
+            <span class="flow-chip"><b>②</b> 跟例句</span>
+            <span class="flow-chip"><b>③</b> 出题检测</span>
+            <span class="flow-chip"><b>④</b> 换词表 20 词</span>
           </div>
-          <div class="ep-body">
-            <div class="ep-title">点杯咖啡，这一句就够</div>
-            <div class="ep-fw">Can I get a ___, please?</div>
-            <div class="ep-meta"><span>58 秒</span><span>·</span><span>20 个换词</span></div>
-          </div>
-        </a>
-        <div class="ep-card is-soon">
-          <div class="ep-thumb"><span class="soon-num">003</span></div>
-          <div class="ep-body">
-            <div class="ep-title" style="color:var(--muted)">即将上线</div>
-            <div class="ep-fw">日更筹备中</div>
-            <div class="ep-meta"><span class="badge badge-soon">每周多集</span></div>
+          <div class="acts" style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="episode.html">进入学习</a>
+            <button class="speak" data-audio="assets/audio/ck001/00_hook.mp3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+              听本集钩子
+            </button>
           </div>
         </div>
       </div>
@@ -102,6 +136,47 @@
 
     <section class="section">
       <div class="sec-head">
+        <div class="sec-title">最近更新</div>
+        <a class="sec-sub" href="chunk.html" style="color:var(--accent)">全部单集 →</a>
+      </div>
+      <div class="ep-grid">
+        <a class="ep-card" href="episode.html">
+          <div class="ep-thumb">
+            <img src="assets/covers/ck001.png" alt="第 001 期">
+            <span class="badge badge-free">免费</span>
+            <span class="ep-no">NO.001</span>
+          </div>
+          <div class="ep-body">
+            <div class="ep-title">问路，这一句就够</div>
+            <div class="ep-fw">How do I get to the ___?</div>
+            <div class="ep-meta"><span>64 秒</span><span>·</span><span>✓ 已上线</span></div>
+          </div>
+        </a>
+        <a class="ep-card locked" href="episode.html">
+          <div class="ep-thumb">
+            <img src="assets/cards/card_98_extend.png" alt="第 002 期">
+            <span class="badge badge-vip">会员</span>
+            <span class="ep-no">NO.002</span>
+          </div>
+          <div class="ep-body">
+            <div class="ep-title">点杯咖啡，这一句就够</div>
+            <div class="ep-fw">Can I get a ___, please?</div>
+            <div class="ep-meta"><span>58 秒</span><span>·</span><span>20 个换词</span></div>
+          </div>
+        </a>
+        <div class="ep-card is-soon">
+          <div class="ep-thumb"><span class="soon-num">003</span></div>
+          <div class="ep-body">
+            <div class="ep-title" style="color:var(--muted)">即将上线</div>
+            <div class="ep-fw">日更筹备中</div>
+            <div class="ep-meta"><span class="badge badge-soon">每周多集</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="sec-head">
         <div class="sec-title">为什么是「语块」</div>
         <div class="sec-sub">不是背单词，是整句往外说</div>
       </div>
@@ -123,12 +198,13 @@
       <a class="btn btn-primary" href="pricing.html">了解会员</a>
     </section>
 
+    <div class="demo-note">静态 UI 预览（v2）：Hero 演示可直接输入任意地点试听（演示词表内含 23 词）；正式版由 TTS 实时合成。</div>
   </div>
 </main>
 
 <footer class="footer">
   <div class="container">
-    <div class="fbrand">苑说英语</div>
+    <div class="fbrand"><img src="assets/logo/logo.svg" alt="苑说英语"></div>
     <div class="cols">
       <div>
         <p style="font-weight:600;color:var(--ink);margin-bottom:8px">学习</p>
@@ -143,9 +219,10 @@
         <p><a href="pricing.html">开通会员</a></p>
       </div>
       <div>
-        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">关于</p>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:8px">更多</p>
+        <p><a href="about.html">关于我们</a></p>
+        <p><a href="logo.html">品牌与 Logo</a></p>
         <p>chunk.rubyc.cn</p>
-        <p>视频同款：抖音 / B站 / 视频号</p>
       </div>
     </div>
     <div class="copy">© 2026 苑说英语 · 静态 UI 预览，非最终上线版本</div>
@@ -153,5 +230,61 @@
 </footer>
 
 <script src="app.js"></script>
+<script>
+(function () {
+  var WORDS = {
+    subway: ['01_en', '地铁站'], hospital: ['02_en', '医院'], school: ['03_en', '学校'],
+    gym: ['ext_w00', '体育馆'], museum: ['ext_w01', '博物馆'], airport: ['ext_w02', '机场'],
+    station: ['ext_w03', '车站'], bank: ['ext_w04', '银行'], library: ['ext_w05', '图书馆'],
+    pharmacy: ['ext_w06', '药店'], supermarket: ['ext_w07', '超市'], restroom: ['ext_w08', '洗手间'],
+    park: ['ext_w09', '公园'], hotel: ['ext_w11', '酒店'], restaurant: ['ext_w12', '餐厅'],
+    'post office': ['ext_w13', '邮局'], cinema: ['ext_w14', '电影院'], cafe: ['ext_w15', '咖啡馆'],
+    market: ['ext_w16', '菜市场'], beach: ['ext_w17', '海边'], downtown: ['ext_w19', '市中心']
+  };
+  var input = document.getElementById('heroSlot');
+  var zh = document.getElementById('heroZh');
+  var play = document.getElementById('heroPlay');
+  var audio = null;
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function () { t.classList.remove('show'); }, 2400);
+  }
+  function syncZh() {
+    var w = (input.value || '').trim().toLowerCase();
+    zh.textContent = w && WORDS[w] ? WORDS[w][1] : '…';
+  }
+  input.addEventListener('input', syncZh);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryPlay(); });
+
+  function tryPlay() {
+    var w = (input.value || '').trim().toLowerCase();
+    if (!w) { input.focus(); return; }
+    var hit = WORDS[w];
+    if (!hit) {
+      toast('「' + input.value.trim() + '」暂无发音（演示词表 23 词），试试 subway / gym');
+      return;
+    }
+    if (audio) { audio.pause(); }
+    audio = new Audio('assets/audio/ck001/' + hit[0] + '.mp3');
+    play.textContent = '正在播…';
+    audio.play();
+    audio.onended = function () { play.textContent = '听发音'; };
+    audio.onerror = function () { play.textContent = '听发音'; };
+  }
+  play.addEventListener('click', tryPlay);
+
+  document.querySelectorAll('.chip[data-word]').forEach(function (c) {
+    c.addEventListener('click', function () {
+      input.value = c.getAttribute('data-word');
+      syncZh();
+      tryPlay();
+    });
+  });
+})();
+</script>
 </body>
 </html>
