@@ -178,6 +178,17 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
 .dashboard-list a:last-child { border-bottom: 0; }
 .dashboard-list span { color: var(--accent); font-family: ui-monospace, monospace; font-size: 12px; }
 .dashboard-list em { color: var(--muted); font-size: 13px; font-style: normal; }
+.admin-page { min-height: 62vh; padding: 95px 0; }
+.admin-page h1 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(38px, 6vw, 58px); }
+.admin-page > p { color: var(--ink-soft); }
+.admin-table { margin-top: 30px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.admin-table > div { display: grid; grid-template-columns: 90px 1fr auto auto; gap: 16px; align-items: center; padding: 15px 18px; border-bottom: 1px solid var(--line); }
+.admin-table > div:last-child { border-bottom: 0; }
+.admin-table span { color: var(--accent); font-family: ui-monospace, monospace; font-size: 12px; }
+.admin-table label { color: var(--ink-soft); font-size: 13px; }
+.admin-form { display: grid; grid-template-columns: 1fr 110px 1.5fr auto; gap: 10px; margin-top: 28px; }
+.admin-form select, .admin-form input { min-height: 42px; padding: 9px 12px; border: 1px solid #d8d1c1; border-radius: 10px; background: white; }
+.code-output { margin-top: 20px; padding: 16px; overflow: auto; border-radius: 12px; color: #f4eee5; background: var(--ink); font-family: ui-monospace, monospace; font-size: 13px; }
 .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .pricing-grid article, .redeem-section { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .pricing-grid .featured { border-color: var(--accent); box-shadow: 0 18px 32px -28px rgba(226,60,32,.8); }
@@ -213,6 +224,8 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
   .member-callout, .footer-inner { align-items: flex-start; flex-direction: column; padding: 32px 26px; }
   .member-callout h2 { font-size: 28px; }
   .pricing-grid { grid-template-columns: 1fr; }
+  .admin-table > div { grid-template-columns: 1fr; gap: 6px; }
+  .admin-form { grid-template-columns: 1fr; }
   .auth-page { padding: 72px 0; }
   .archive-hero, .lesson-head { padding: 54px 0 30px; }
   .media-section { grid-template-columns: 1fr; gap: 22px; }

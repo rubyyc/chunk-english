@@ -1,0 +1,4 @@
+"use client";
+import { useState } from "react";
+type Episode={id:string;epNo:string;index:number;title:string;published:boolean;isFree:boolean};
+export function AdminEpisodes({initial}:{initial:Episode[]}){const [episodes,setEpisodes]=useState(initial);async function patch(id:string,key:"published"|"isFree",value:boolean){const r=await fetch("/api/admin/episodes",{method:"PATCH",headers:{"content-type":"application/json"},body:JSON.stringify({id,[key]:value})});if(!r.ok)return;setEpisodes(items=>items.map(item=>item.id===id?{...item,[key]:value}:item));}return <div className="admin-table">{episodes.map(ep=><div key={ep.id}><span>NO.{ep.index.toString().padStart(3,"0")}</span><b>{ep.title}</b><label><input type="checkbox" checked={ep.published} onChange={e=>patch(ep.id,"published",e.target.checked)}/> 已上架</label><label><input type="checkbox" checked={ep.isFree} onChange={e=>patch(ep.id,"isFree",e.target.checked)}/> 免费</label></div>)}</div>}

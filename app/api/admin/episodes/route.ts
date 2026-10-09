@@ -1,0 +1,5 @@
+import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin";
+import { prisma } from "@/lib/prisma";
+export async function GET(){const auth=await requireAdmin();if(auth.response)return auth.response;return NextResponse.json({data:await prisma.episode.findMany({orderBy:[{sort:"asc"},{index:"asc"}],select:{id:true,epNo:true,index:true,title:true,published:true,isFree:true,createdAt:true}})})}
+export async function PATCH(request:Request){const auth=await requireAdmin();if(auth.response)return auth.response;const body=await request.json().catch(()=>null) as {id?:string;published?:boolean;isFree?:boolean}|null;if(!body?.id||typeof body.published!=="boolean"&&typeof body.isFree!=="boolean")return NextResponse.json({error:"更新参数无效。"},{status:400});const data=await prisma.episode.update({where:{id:body.id},data:{...(typeof body.published==="boolean"?{published:body.published}:{}),...(typeof body.isFree==="boolean"?{isFree:body.isFree}:{})},select:{id:true,epNo:true,published:true,isFree:true}});return NextResponse.json({data})}

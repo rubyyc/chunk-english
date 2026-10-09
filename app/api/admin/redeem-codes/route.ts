@@ -1,0 +1,6 @@
+import { randomBytes } from "node:crypto";
+import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin";
+import { prisma } from "@/lib/prisma";
+export async function GET(){const auth=await requireAdmin();if(auth.response)return auth.response;return NextResponse.json({data:await prisma.redeemCode.findMany({include:{plan:{select:{name:true,code:true}}},orderBy:{createdAt:"desc"},take:100})})}
+export async function POST(request:Request){const auth=await requireAdmin();if(auth.response)return auth.response;const body=await request.json().catch(()=>null) as {planCode?:string;count?:number;batch?:string;expiresAt?:string}|null;const count=Math.min(Math.max(Math.floor(body?.count??0),1),100);const plan=body?.planCode&&await prisma.plan.findUnique({where:{code:body.planCode}});if(!plan)return NextResponse.json({error:"套餐不存在。"},{status:404});const expiresAt=body?.expiresAt?new Date(body.expiresAt):null;if(expiresAt&&Number.isNaN(expiresAt.getTime()))return NextResponse.json({error:"过期日期无效。"},{status:400});const codes=Array.from({length:count},()=>`CE-${randomBytes(5).toString("hex").toUpperCase()}`);await prisma.redeemCode.createMany({data:codes.map(code=>({code,planId:plan.id,batch:body?.batch?.trim().slice(0,40)||null,expiresAt}))});return NextResponse.json({data:codes},{status:201})}
