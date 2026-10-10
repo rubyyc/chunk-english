@@ -188,6 +188,9 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
 .admin-page { min-height: 62vh; padding: 95px 0; }
 .admin-page h1 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(38px, 6vw, 58px); }
 .admin-page > p { color: var(--ink-soft); }
+.admin-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+.admin-links a { padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); font-weight: 700; }
+.admin-links a:hover { border-color: var(--accent); color: var(--accent-dark); }
 .admin-table { margin-top: 30px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .admin-table > div { display: grid; grid-template-columns: 90px 1fr auto auto; gap: 16px; align-items: center; padding: 15px 18px; border-bottom: 1px solid var(--line); }
 .admin-table > div:last-child { border-bottom: 0; }
@@ -231,6 +234,7 @@ h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(3
   .member-callout, .footer-inner { align-items: flex-start; flex-direction: column; padding: 32px 26px; }
   .member-callout h2 { font-size: 28px; }
   .pricing-grid { grid-template-columns: 1fr; }
+  .admin-links { grid-template-columns: 1fr; }
   .admin-table > div { grid-template-columns: 1fr; gap: 6px; }
   .admin-form { grid-template-columns: 1fr; }
   .auth-page { padding: 72px 0; }
