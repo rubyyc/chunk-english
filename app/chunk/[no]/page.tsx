@@ -4,6 +4,7 @@ import { LearningActions } from "@/components/learning-actions";
 import { QuizCard } from "@/components/quiz-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { ShadowRecorder } from "@/components/shadow-recorder";
 import { VideoPanel } from "@/components/video-panel";
 import { getPublishedEpisode } from "@/lib/content";
 import { canAccess } from "@/lib/permission";
@@ -78,6 +79,7 @@ export default async function EpisodePage({ params }: EpisodePageProps) {
               <div className="audio-actions">
                 <AudioButton src={item.audioEnKey ? publicMediaUrl(item.audioEnKey) : null} label="英文" />
                 <AudioButton src={item.audioZhKey ? publicMediaUrl(item.audioZhKey) : null} label="中文" />
+                {viewer.id && <ShadowRecorder epNo={episode.epNo} itemOrder={item.order} />}
               </div>
             </article>
           ))}
