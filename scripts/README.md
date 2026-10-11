@@ -4,28 +4,24 @@
 
 | 脚本 | 状态 | 说明 |
 |---|---|---|
-| `import_episode.ts` | ✅ 已实现 | 从视频项目导入单集：读 `content/*.json` + `assets/`，可上传 MinIO、写数据库。详见 [../docs/05-内容同步方案.md](../docs/05-内容同步方案.md) |
+| `import_episode.ts` | ⚠️ **已作废** | 按旧版 docs/05 写就（本地直传 PG/MinIO 方向）。用户已拍板新方案，**不要在此基础上继续开发**；其 content JSON 解析、真源路径、幂等策略可复用。替代方案见 [../docs/07-内容同步与服务器TTS方案.md](../docs/07-内容同步与服务器TTS方案.md) 第 7 节 |
+| `sync_episode.py` | ⬜ 待实施 | 新方案的一键同步 CLI（本地打包 JSON+图 → HTTPS 管理 API → 服务器 TTS 生成音频）。**实施规格已定稿在 docs/07** |
 
-## 计划用法
+## 新方案要点（详见 docs/07）
 
-```bash
-# 演练（不落地）
-npm run import:episode -- --ep CK001 --video-root ~/WorkBuddy/英语短视频 --dry-run
-
-# 真导入
-npm run import:episode -- --ep CK001 --video-root ~/WorkBuddy/英语短视频 --upload --db
-
-# 全量
-npm run import:episode -- --all --video-root ~/WorkBuddy/英语短视频 --upload --db
-```
+- 本地**不生成、不上传任何 mp3 / mp4**；只推 `content JSON + 三端封面 + 例句背景图`
+- 音频（每集 24 段）由服务器 `chunk-tts` Worker 用 edge-tts 生成，直写 MinIO
+- 对象 Key 与视频项目文件名一致：`audio/ck001/ext_w07.mp3`
+- 通道走 HTTPS + `X-Admin-Token`，不走 SSH 隧道
 
 ## 依赖
 
-使用项目已有的 Node.js 依赖：`@aws-sdk/client-s3`、Prisma 与 `tsx`。执行前先运行 `npm install`。
+- 旧脚本：项目 Node.js 依赖（`@aws-sdk/client-s3`、Prisma、`tsx`）
+- 新 CLI：Python 3（可用系统 python3，无 cv2 需求）；兜底模式才需要本地 `edge-tts`
 
-## 约束
+## 约束（新旧通用）
 
-- **幂等**：同参数重复执行结果一致。
-- **不静默跳过**：关键音频缺失（如 `01_en.mp3`）直接报错退出。
-- **不覆盖后台编辑**：`is_free` / `published` 默认不动，要覆盖需显式 `--force-meta`。
-- **单向数据流**：只往网站写，**绝不回写视频项目**。
+- **幂等**：同参数重复执行结果一致
+- **不静默跳过**：关键数据缺失直接报错退出
+- **不覆盖后台编辑**：`is_free` / `published` 默认不动，要覆盖需显式参数
+- **单向数据流**：只往网站写，**绝不回写视频项目**
